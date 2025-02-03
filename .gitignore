@@ -1,0 +1,24 @@
+# Unity默认忽略规则
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+Assets/AssetStoreTools*
+
+# 用户特定文件
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+
+# 自动生成的文件
+.vs/
+.vscode/
+.idea/
