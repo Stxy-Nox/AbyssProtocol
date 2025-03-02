@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public KeyCode crouchInputName = KeyCode.LeftControl;
 
     //Player status 
+    public MovementState movementState; 
     public bool isWalk;
     public bool isRun;
     public bool isGround ;
@@ -49,11 +50,30 @@ public class PlayerController : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v =Input.GetAxisRaw("Vertical");
 
+        isRun = Input.GetKey(runInputName);
+        isWalk = (Mathf.Abs(h)>0 || Mathf.Abs(v)>0) ? true : false;
 
-
-        Speed = walkSpeed;
+        if (isRun)
+        {
+            movementState = MovementState.running;
+            Speed = runSpeed;
+        }
+        else
+        {
+            movementState = MovementState.walking;
+            Speed = walkSpeed;
+        }
+        
 
         moveDirction = (transform.right * h + transform.forward * v).normalized;
         characterController.Move(moveDirction*Speed*Time.deltaTime);
+    }
+
+    public enum MovementState
+    {
+        walking,
+        running,
+        crouching,
+        idle
     }
 }
