@@ -8,16 +8,22 @@ public class PlayerController : MonoBehaviour
     //player setting
     public float walkSpeed;
     public float runSpeed;
+    public float crouchSpeed;
     private float Speed;
 
     public float jumpForce;
     public float gravity;
-
+    //keyboard input setting
     public KeyCode jumpInputName = KeyCode.Space;
-    
-    private CollisionFlags collisionFlags;
+    public KeyCode runInputName = KeyCode.LeftShift;
+    public KeyCode crouchInputName = KeyCode.LeftControl;
+
+    //Player status 
+    public bool isWalk;
+    public bool isRun;
     public bool isGround ;
 
+    private CollisionFlags collisionFlags;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,6 +48,8 @@ public class PlayerController : MonoBehaviour
         //player instance stop when keyboard input stop:GetAxisRaw
         float h = Input.GetAxisRaw("Horizontal");
         float v =Input.GetAxisRaw("Vertical");
+
+
 
         Speed = walkSpeed;
 
