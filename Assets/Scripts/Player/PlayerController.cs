@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public bool isWalk;
     public bool isRun;
     public bool isGround ;
+    public bool isJump;
 
     private CollisionFlags collisionFlags;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,6 +32,8 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         walkSpeed = 10f;
         runSpeed = 15f;
+        jumpForce = 0f;
+        gravity = 10f;
     }
 
     // Update is called once per frame
@@ -48,27 +51,37 @@ public class PlayerController : MonoBehaviour
     {
         //player instance stop when keyboard input stop:GetAxisRaw
         float h = Input.GetAxisRaw("Horizontal");
-        float v =Input.GetAxisRaw("Vertical");
+        float v = Input.GetAxisRaw("Vertical");
 
         isRun = Input.GetKey(runInputName);
-        isWalk = (Mathf.Abs(h)>0 || Mathf.Abs(v)>0) ? true : false;
+        isWalk = (Mathf.Abs(h) > 0 || Mathf.Abs(v) > 0) ? true : false;
 
-        if (isRun)
+        if (isRun & isGround)
         {
             movementState = MovementState.running;
             Speed = runSpeed;
         }
-        else
-        {
-            movementState = MovementState.walking;
-            Speed = walkSpeed;
+        else if (isGround)
+        { // walk normally
+            {
+                movementState = MovementState.walking;
+                Speed = walkSpeed;
+            }
         }
         
-
-        moveDirction = (transform.right * h + transform.forward * v).normalized;
-        characterController.Move(moveDirction*Speed*Time.deltaTime);
+            moveDirction = (transform.right * h + transform.forward * v).normalized;
+            characterController.Move(moveDirction * Speed * Time.deltaTime);
     }
 
+    public void Jump()
+    {
+        isJump = Input.GetKey(jumpInputName);
+        if (isJump&& isGround) 
+        {
+            isGround = false;
+        }
+
+    } 
     public enum MovementState
     {
         walking,
