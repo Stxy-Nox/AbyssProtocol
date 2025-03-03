@@ -39,10 +39,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    private void FixedUpdate()
-    {
+        Jump();
         Moving();
     }
 
@@ -76,9 +73,28 @@ public class PlayerController : MonoBehaviour
     public void Jump()
     {
         isJump = Input.GetKey(jumpInputName);
-        if (isJump&& isGround) 
+        if (isJump&& isGround) //jump only avaliable when player on the ground
         {
             isGround = false;
+            jumpForce = 5f;
+        }
+        // after jump and not on the ground
+        if (!isGround)
+        {
+            jumpForce -= gravity * Time.deltaTime;//reduce jumpforce cumulatively , make player fall
+            Vector3 jump = new Vector3(0,jumpForce* Time.deltaTime,0);//translate jumpforece to v3 position
+            collisionFlags =  characterController.Move(jump);// use characterController move funciton to simulate  jumping
+
+            if (collisionFlags == CollisionFlags.Below)
+            {
+                isGround = true;
+                jumpForce = 0f;
+            }
+
+            if (isGround && collisionFlags == CollisionFlags.None)
+            {
+                isGround = false;
+            }
         }
 
     } 
