@@ -2,30 +2,29 @@ using UnityEngine;
 
 public class BuildingGenerater : MonoBehaviour
 {
-    private bool shouldRise = false;
-    public float targetHeight = 2f;
-    public float riseSpeed = 2f;
-    private Vector3 startPosition;
-    public GameObject buildingGroup;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public bool shouldRise = false;
+    public float targetHeight = 0;
+    public float riseSpeed = 1;
+    public Vector3 startPosition;
     void Start()
     {
-        buildingGroup = GetComponentInChildren<GameObject>();
-        startPosition = buildingGroup.transform.position;
+         startPosition = new Vector3(-16,-6,-14);//magic number just for test
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (shouldRise)
+
+
+        if (transform.position.y < 0)
         {
-            buildingGroup.transform.position = Vector3.Lerp(transform.position, new Vector3(startPosition.x,targetHeight,startPosition.z),riseSpeed*Time.deltaTime);
+            StartingRising(targetHeight, riseSpeed);
         }
+        
     }
 
-    public void StartingRising()
+    public void StartingRising(float height, float speed)
     {
-        shouldRise = true;
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, height, transform.position.z), speed*Time.deltaTime);
     }
 }
