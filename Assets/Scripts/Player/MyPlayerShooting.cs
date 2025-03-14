@@ -71,6 +71,8 @@ public class MyPlayerShooting : MonoBehaviour
             {
                 TargetForBuildingRise targetForBuildingRise = shootHit.collider.GetComponent<TargetForBuildingRise>();
                 targetForBuildingRise.isHit = true;
+                targetForBuildingRise.hitFlag += 1;
+                Debug.Log("hitflag" + targetForBuildingRise.hitFlag);
             }
         }
         else
