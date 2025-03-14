@@ -9,7 +9,7 @@ public class BuildingGenerater : MonoBehaviour
     void Start()
     {
          startPosition = new Vector3(-16,-6,-14);//magic number just for test
-
+        transform.position = startPosition;
     }
 
     void Update()

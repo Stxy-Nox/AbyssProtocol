@@ -61,10 +61,17 @@ public class MyPlayerShooting : MonoBehaviour
         if(Physics.Raycast(shootRay, out shootHit, 100, shootMask))
         {
             gunLine.SetPosition(1,shootHit.point);
-
-            MyEnemyHealth enemyHealth =  shootHit.collider.GetComponent<MyEnemyHealth>();
-            enemyHealth.TakeDamege(10, shootHit.point);
-            int health = enemyHealth.StartingHealth;
+            if (shootHit.collider.tag == "Enemy")
+            {
+                MyEnemyHealth enemyHealth =  shootHit.collider.GetComponent<MyEnemyHealth>();
+                enemyHealth.TakeDamege(10, shootHit.point);
+                //int health = enemyHealth.StartingHealth;
+            }
+            if (shootHit.collider.tag == "Trigger")
+            {
+                TargetForBuildingRise targetForBuildingRise = shootHit.collider.GetComponent<TargetForBuildingRise>();
+                targetForBuildingRise.isHit = true;
+            }
         }
         else
         {
