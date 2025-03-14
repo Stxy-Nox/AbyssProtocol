@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BuildingGenerater : MonoBehaviour
 {
-    public bool shouldRise = false;
+    private bool shouldRise = false;
     public float targetHeight = 0;
     public float riseSpeed = 1;
     public Vector3 startPosition;
@@ -16,15 +16,15 @@ public class BuildingGenerater : MonoBehaviour
     {
 
 
-        if (transform.position.y < 0)
+        if (shouldRise && transform.position.y < 0)
         {
-            StartingRising(targetHeight, riseSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, height, transform.position.z), speed * Time.deltaTime);
         }
         
     }
 
-    public void StartingRising(float height, float speed)
+    public void StartingRising()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, height, transform.position.z), speed*Time.deltaTime);
+        shouldRise = true;
     }
 }

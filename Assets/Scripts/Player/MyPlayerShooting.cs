@@ -68,7 +68,7 @@ public class MyPlayerShooting : MonoBehaviour
         }
         else
         {
-            gunLine.SetPosition(1,transform.position+transform.forward*50);
+            gunLine.SetPosition(1, transform.position + transform.forward * 50);
         }
     }
 }

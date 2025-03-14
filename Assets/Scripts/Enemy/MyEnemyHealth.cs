@@ -80,8 +80,5 @@ public class MyEnemyHealth : MonoBehaviour
     }
 
 
-    public void RestartLevel()
-    {
-        SceneManager.LoadScene(0);
-    }
+
 }
