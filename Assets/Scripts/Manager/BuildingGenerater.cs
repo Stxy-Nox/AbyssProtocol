@@ -18,7 +18,7 @@ public class BuildingGenerater : MonoBehaviour
 
         if (shouldRise && transform.position.y < 0)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, height, transform.position.z), speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, targetHeight, transform.position.z), riseSpeed * Time.deltaTime);
         }
         
     }

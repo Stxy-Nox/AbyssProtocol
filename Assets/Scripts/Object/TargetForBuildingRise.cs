@@ -3,7 +3,8 @@ using UnityEngine;
 public class TargetForBuildingRise : MonoBehaviour
 {
     public bool isHit = false;
-    private BuildingGenerater buildingGenerater;
+    public BuildingGenerater buildingGenerater;
+    //public GameObject buildingGroup;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
